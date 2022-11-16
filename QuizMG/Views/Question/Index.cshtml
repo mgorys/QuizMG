@@ -1,0 +1,79 @@
+﻿@model QuestionDto
+
+@{
+	ViewBag.Title = "Index";
+	var id = ViewBag.Id;
+	var obj = Model;
+	var idn = id + 1;
+
+}
+@using (Html.BeginForm("Index", "Question", FormMethod.Post))
+{
+	<div class="text-center">
+		<main class="question-container">
+			@if (Model != null)
+			{
+				<h1>
+					<label id="CounterLabel">Question nr: @id</label>
+				</h1>
+
+				@if (Model.AfterAnswer == false)
+				{
+
+					<h2 id="questiontext">
+						@obj.QuestionText.ToString()
+					</h2>
+					<div class="button-container">
+						<div class="col ">
+							<button class="btn btn-primary" value="@obj.Option1.ToString()" name="answered">
+								@obj.Option1.ToString()
+							</button>
+						</div>
+						<div class="col ">
+							<button class="btn btn-primary" value="@obj.Option2.ToString()" name="answered">
+								@obj.Option2.ToString()
+							</button>
+						</div>
+						<div class="col ">
+							<button class="btn btn-primary" value="@obj.Option3.ToString()" name="answered">
+								@obj.Option3.ToString()
+							</button>
+						</div>
+						<div class="col ">
+							<button class="btn btn-primary" value="@obj.Option4.ToString()" name="answered">
+								@obj.Option4.ToString()
+							</button>
+						</div>
+					</div>
+				}
+				@if(Model.AfterAnswer == true)
+				{
+				<h2>
+					@obj.ErrorMessage
+					@if(Model.GoodAnswer == false)
+					{
+						@obj.Answer.ToString()
+					}
+					
+				</h2>
+				}
+				@if (Model.GoodAnswer == true && idn<15)
+				{
+					<a asp-controller="Question" asp-action="Index" asp-route-id=@idn class="btn btn-secondary">Next question</a>
+				}
+
+				@if (Model.GoodAnswer == true && id == 15)
+				{
+					<h2>You have reach last question. Congratulations!</h2>
+				}
+
+			}
+			else
+			{
+				<h2>Something went wrong.</h2>
+			}
+			
+			<a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to start</a>
+		</main>
+	</div>
+}

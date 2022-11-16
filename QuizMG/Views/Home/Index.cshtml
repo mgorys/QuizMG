@@ -1,0 +1,33 @@
+﻿
+@{
+	ViewData["Title"] = "Home Page";
+}
+<div>
+	<div class="home-container">
+		<div id="grid-item">
+			<h2>
+				UI title
+			</h2>
+			<h4>
+			Hello! This is quiz. To start click button below. To answer choose one button and click it. 
+			After that you will get respond if your answer is correct. If so you can press button with next question. 
+			If not you can start again by clicking back to start button.
+			</h4>
+		</div>
+		<div id="grid-item">
+			<h2>
+				Arch title
+			</h2>
+			<h4>
+			Repository pattern with database.
+			
+			</h4>
+		</div>
+	</div>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+	
+<a asp-controller="Question" asp-action="Index" asp-route-id="1" class="btn btn-secondary">Start Quiz</a>
+}
+</div>
+
