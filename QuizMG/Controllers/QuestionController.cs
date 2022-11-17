@@ -16,15 +16,26 @@ namespace QuizMG.Controllers
 
         public IActionResult Index([FromRoute] int id, string answered)
         {
-            if (id == 1)
-            {
-                _httpContextAccessor.HttpContext.Session.SetInt32("Lifebelt", 1);
-            }
-            if (answered == "Lifebelt")
-            {
-                _httpContextAccessor.HttpContext.Session.SetInt32("Lifebelt", 0);
-            }
             ViewBag.Id = id;
+            if (id == 1 && answered == null)
+            {
+                _httpContextAccessor.HttpContext.Session.SetInt32("Jump", 1);
+                _httpContextAccessor.HttpContext.Session.SetInt32("50/50", 1);
+                _httpContextAccessor.HttpContext.Session.SetInt32("Swap", 1);
+            }
+            if (answered == "50/50")
+            {
+                _httpContextAccessor.HttpContext.Session.SetInt32("50/50", 0);
+            } 
+            if (answered == "Swap")
+            {
+                _httpContextAccessor.HttpContext.Session.SetInt32("Swap", 0);
+                _httpContextAccessor.HttpContext.Session.SetInt32("SkippedId", id);
+            }
+            if (answered == "Jump")
+            {
+                _httpContextAccessor.HttpContext.Session.SetInt32("Jump", 0);
+            }
             var result = _questionService.Process(id, answered);
 
             return View(result);

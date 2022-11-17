@@ -6,7 +6,10 @@
 	var id = ViewBag.Id;
 	var obj = Model;
 	var idn = id + 1;
-	var lifebelt = context.HttpContext.Session.GetInt32("Lifebelt");
+	var lifebelt = context.HttpContext.Session.GetInt32("Jump");
+	var fiftyFifty = context.HttpContext.Session.GetInt32("50/50");
+	var swap = context.HttpContext.Session.GetInt32("Swap");
+	var skippedId = context.HttpContext.Session.GetInt32("SkippedId");
 
 }
 @using (Html.BeginForm("Index", "Question", FormMethod.Post))
@@ -16,17 +19,39 @@
 			@if (Model != null)
 			{
 				<h1>
-					<label id="CounterLabel">Question nr: @id</label>
+					<label id="CounterLabel">Question nr: @if (skippedId != id)
+						{
+							@id
+						}
+						else{
+							@skippedId
+						}
+					</label>
 				</h1>
 
 				@if (Model.AfterAnswer == false)
 				{
+					<div class="helps-container">
+
 					@if (lifebelt > 0)
 					{
-						<button class="btn btn-primary lifebelt" value="Lifebelt" name="answered">
-							Lifebelt
+						<button class="btn btn-primary helps" value="Jump" name="answered">
+							Jump
 						</button>
 					}
+					@if (fiftyFifty > 0)
+					{
+						<button class="btn btn-primary helps" value="50/50" name="answered">
+							50/50
+						</button>
+					}
+					@if( swap > 0)
+					{
+						<button class="btn btn-primary helps" value="Swap" name="answered">
+							Swap
+						</button>
+					}
+					</div>
 
 
 					<h2 id="questiontext">
