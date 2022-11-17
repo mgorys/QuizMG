@@ -57,14 +57,14 @@
 					
 				</h2>
 				}
-				@if (Model.GoodAnswer == true && idn<15)
+				@if (Model.GoodAnswer == true && id<15)
 				{
 					<a asp-controller="Question" asp-action="Index" asp-route-id=@idn class="btn btn-secondary">Next question</a>
 				}
 
 				@if (Model.GoodAnswer == true && id == 15)
 				{
-					<h2>You have reach last question. Congratulations!</h2>
+					<h2>You have reached last question. Congratulations!</h2>
 				}
 
 			}

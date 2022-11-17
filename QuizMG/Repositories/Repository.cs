@@ -35,10 +35,7 @@ namespace QuizMG.Repositories
             {
                 var question = _dbContext.Questions.FirstOrDefault(p => p.QstNmb == questionId);
                 var result = _mapper.Map<QuestionDto>(question);
-                if( question == null)
-                {
-                    result.ErrorMessage = "Question not found";    
-                }
+
                 return result;
             }
             catch (Exception ex)
