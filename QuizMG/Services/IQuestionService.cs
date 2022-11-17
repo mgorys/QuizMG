@@ -4,8 +4,6 @@ namespace QuizMG.Services
 {
     public interface IQuestionService
     {
-        QuestionDto CheckAnswer(int questionId, string answered);
-        IEnumerable<QuestionDto> GetAll();
-        QuestionDto GetById(int questionId);
+        QuestionDto Process(int questionId, string answered);
     }
 }

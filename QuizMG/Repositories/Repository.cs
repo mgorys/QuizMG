@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using QuizMG.Data;
+using QuizMG.Exceptions;
 using QuizMG.Models.DTOs;
 
 namespace QuizMG.Repositories
@@ -15,20 +16,6 @@ namespace QuizMG.Repositories
             _dbContext = dbContext;
             _mapper = mapper;
         }
-        public IEnumerable<QuestionDto> GetAll()
-        {
-            try
-            {
-                var questions = _dbContext.Questions;
-                var mappedQuestions = _mapper.Map<IEnumerable<QuestionDto>>(questions);
-                return mappedQuestions;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
         public QuestionDto GetById(int questionId)
         {
             try
@@ -40,7 +27,7 @@ namespace QuizMG.Repositories
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new NotFoundException("Problem with database. Sorry.");
             }
         }
     }

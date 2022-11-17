@@ -25,7 +25,7 @@ namespace QuizMG.Controllers
                 _httpContextAccessor.HttpContext.Session.SetInt32("Lifebelt", 0);
             }
             ViewBag.Id = id;
-            var result = _questionService.CheckAnswer(id, answered);
+            var result = _questionService.Process(id, answered);
 
             return View(result);
         }

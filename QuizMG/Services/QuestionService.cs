@@ -11,16 +11,7 @@ namespace QuizMG.Services
         {
             _repository = repository;
         }
-        public IEnumerable<QuestionDto> GetAll()
-        {
-            return _repository.GetAll();
-        }
-        public QuestionDto GetById(int questionId)
-        {
-            var result = _repository.GetById(questionId);
-            return result;
-        }
-        public QuestionDto CheckAnswer(int questionId, string answered)
+        public QuestionDto Process(int questionId, string answered)
         {
             var result = _repository.GetById(questionId);
             if (answered != null)
