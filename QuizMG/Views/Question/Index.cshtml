@@ -1,10 +1,12 @@
-﻿@model QuestionDto
+﻿@inject IHttpContextAccessor context;
+@model QuestionDto
 
 @{
 	ViewBag.Title = "Index";
 	var id = ViewBag.Id;
 	var obj = Model;
 	var idn = id + 1;
+	var lifebelt = context.HttpContext.Session.GetInt32("Lifebelt");
 
 }
 @using (Html.BeginForm("Index", "Question", FormMethod.Post))
@@ -19,6 +21,13 @@
 
 				@if (Model.AfterAnswer == false)
 				{
+					@if (lifebelt > 0)
+					{
+						<button class="btn btn-primary lifebelt" value="Lifebelt" name="answered">
+							Lifebelt
+						</button>
+					}
+
 
 					<h2 id="questiontext">
 						@obj.QuestionText.ToString()
@@ -46,18 +55,17 @@
 						</div>
 					</div>
 				}
-				@if(Model.AfterAnswer == true)
+				@if (Model.AfterAnswer == true)
 				{
-				<h2>
-					@obj.ErrorMessage
-					@if(Model.GoodAnswer == false)
-					{
-						@obj.Answer.ToString()
-					}
-					
-				</h2>
+					<h2>
+						@obj.ErrorMessage
+						
+							: @obj.Answer.ToString()
+						
+
+					</h2>
 				}
-				@if (Model.GoodAnswer == true && id<15)
+				@if (Model.GoodAnswer == true && id < 15)
 				{
 					<a asp-controller="Question" asp-action="Index" asp-route-id=@idn class="btn btn-secondary">Next question</a>
 				}
@@ -72,7 +80,7 @@
 			{
 				<h2>Something went wrong.</h2>
 			}
-			
+
 			<a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to start</a>
 		</main>
 	</div>

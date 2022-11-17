@@ -25,16 +25,26 @@ namespace QuizMG.Services
             var result = _repository.GetById(questionId);
             if (answered != null)
             {
-                if (result.Answer == answered)
+                if (answered == "Lifebelt")
                 {
-                    result.ErrorMessage = "Correct answer";
+                    result.ErrorMessage = "Correct answer was";
                     result.GoodAnswer = true;
                     result.AfterAnswer = true;
                 }
                 else
                 {
-                    result.ErrorMessage = "Wrong answer. Correct answer was: ";
-                    result.AfterAnswer = true;
+
+                    if (result.Answer == answered)
+                    {
+                        result.ErrorMessage = "Correct answer";
+                        result.GoodAnswer = true;
+                        result.AfterAnswer = true;
+                    }
+                    else
+                    {
+                        result.ErrorMessage = "Wrong answer. Correct answer was";
+                        result.AfterAnswer = true;
+                    }
                 }
             }
             return result;
