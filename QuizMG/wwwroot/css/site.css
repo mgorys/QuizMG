@@ -77,3 +77,6 @@ body {
     padding: 0px;
     justify-content: space-between;
 }
+.swap{
+    display:none
+}
