@@ -12,7 +12,9 @@
 				Hello! This is general knowledge 15 questions quiz with 4 possible answers. To answer just choose one button and click it.
 
 				After that you will get respond if your answer is correct. If so, you can press button with next question.
+
 				When you have a doubt you can help yourself with lifebelts, which you can use once per game.
+				
 				Jump option to skip question you don't want to answer, 50/50 to mark two wrong answers.
 
 				If you have chosen wrong answer, you can start again by clicking back to start button. To start game, click button below.
@@ -25,9 +27,14 @@
 			<h4>
 			This is a web application, which uses Model-View-Controller (MVC) design patter.
 
-			Model part is supported by repository pattern, which contains businness logic with operations that should be performed by it.
+			Model part is supported by repository-service pattern, which contains businness logic with operations that should be performed by it.
 
-			Application is connected to a local database.
+			Repository-Service pattern divides the business layer into two semi-layers. Repository handles getting data into and out of database.
+
+			Service is responsible for operations on data and passing them between repository and controller.
+			
+			Another important part is usage of routing. Route defines what question should be shown as its id is in URL.
+			
 			
 			</h4>
 		</div>
